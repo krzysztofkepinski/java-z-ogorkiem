@@ -12,6 +12,9 @@ dependencies {
 }
 
 repositories {
+    maven {
+        url "http://nexus.srinternal.net/nexus/content/groups/public/"
+    }
     mavenCentral()
 }
 
