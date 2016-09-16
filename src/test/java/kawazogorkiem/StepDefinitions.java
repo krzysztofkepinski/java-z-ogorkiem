@@ -16,7 +16,7 @@ public class StepDefinitions {
     */
 //    @Given("^a company named ([\\w\\s]+)$")
     @Given("a company")
-    public void aCompany() throws Throwable {
+    public void aCompany() {
     }
 
     /*
