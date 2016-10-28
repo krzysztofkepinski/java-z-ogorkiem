@@ -5,6 +5,6 @@ Feature: User Login
 
   Scenario: Login to existing user account
     Given a company
-    And a user in the company's context
+    And user with login susan@susan.sr.com and password 3c5x9cfg
     When the user logs into the system with her password
     Then she is logged into the company's account
