@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePage {
-    private static String url = "https://int.smartrecruiters.com/account/app/home";
+    private static String url = "https://int.smartrecruiters.com/app/home";
+    private static String page_title = "SmartRecruiters - Home";
 
     private static WebDriver driver;
 
@@ -18,5 +19,9 @@ public class HomePage {
 
     public WebElement getHomeLink() {
         return driver.findElement(homeLink);
+    }
+
+    public void open() {
+        driver.get(this.url);
     }
 }

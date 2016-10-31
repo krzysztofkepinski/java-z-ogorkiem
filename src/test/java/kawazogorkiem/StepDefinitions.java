@@ -8,6 +8,7 @@ import cucumber.api.java.en.When;
 import kawazogorkiem.pageobjects.HomePage;
 import kawazogorkiem.pageobjects.LoginPage;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -44,21 +45,38 @@ public class StepDefinitions {
         password = userPassword;
     }
 
-//    @When("([\\w@\\.]+) logs into the system with password (\\w+)")
     @When("the user logs into the system with her password")
-    public void userLogsIntoTheSystemWithPassword() {
+    public void userLogsIntoTheSystem() {
         LoginPage page = srSite.loginPage();
         page.open();
-        page.setEmail(login);
-        page.setPassword(password);
-        page.clickLogin();
+        page.loginUserWithPassword(login, password);
     }
 
-//    @Then("([\\w@\\.]+) is logged into ([\\w\\s]+)'s account")
+    @When("the user logs into the system with her login and password (\\w+)")
+    public void userLogsIntoTheSystemWithPassword(String somePassword) {
+        LoginPage page = srSite.loginPage();
+        page.open();
+        page.loginUserWithPassword(login, somePassword);
+    }
+
     @Then("she is logged into the company's account")
     public void userIsLoggedIntoCompanyAccount() {
         HomePage page = srSite.homePage();
         assertThat(page.getHomeLink().isDisplayed(), is(true));
+    }
+
+    @Then("she gets an invalid email and password message")
+    public void userGetsInvalidCredentialsMessage() {
+        LoginPage page = srSite.loginPage();
+        assertThat(page.getLoginErrorMessage(), is(equalTo("Please enter your correct e-mail and password")));
+    }
+
+    @Then("she is not logged into the system")
+    public void homePageRedirectsToLoginPage() {
+        HomePage homePage = srSite.homePage();
+        LoginPage loginPage = srSite.loginPage();
+        homePage.open();
+        assertThat(srSite.getPageTitle(), is(equalTo(loginPage.getTitle())));
     }
 
 }

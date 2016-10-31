@@ -48,6 +48,10 @@ public class SRSiteNavigator {
         return this.homePage;
     }
 
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
     public void close() {
         driver.close();
     }
